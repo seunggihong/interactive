@@ -5,7 +5,7 @@ export class Particle {
   constructor(pos, texture) {
     this.sprite = new PIXI.Sprite(texture);
     this.sprite.scale.set(0.1);
-    this.sprite.tint = 0x000000;
+    this.sprite.tint = 0xff06b7;
 
     this.savedX = pos.x;
     this.savedY = pos.y;
