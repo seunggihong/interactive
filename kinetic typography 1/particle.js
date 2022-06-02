@@ -4,7 +4,7 @@ const MOVE_SPEED = 0.1;
 export class Particle {
   constructor(pos, texture) {
     this.sprite = new PIXI.Sprite(texture);
-    this.sprite.scale.set(0.1);
+    this.sprite.scale.set(0.07);
     this.sprite.tint = 0xff06b7;
 
     this.savedX = pos.x;
