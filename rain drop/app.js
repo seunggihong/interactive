@@ -1,5 +1,7 @@
 import { Rain } from "./rain.js";
 
+const RAIN_COUNT = 50;
+
 class App {
   constructor() {
     this.canvas = document.createElement("canvas");
@@ -36,20 +38,18 @@ class App {
   }
 
   spawnRain() {
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < RAIN_COUNT; index++) {
       this.rains.push(new Rain(this.canvasWidth, 5, this.speeds[index]));
     }
   }
 
   randomSpeedCreater() {
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < RAIN_COUNT; index++) {
       this.speeds.push(Math.random() * 10 + 1);
     }
   }
 
-  animate(t) {
-    window.requestAnimationFrame(this.animate.bind(this));
-    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+  infiniteDrop() {
     this.rains.forEach((rain) => {
       if (rain.y > this.canvasHeight) {
         rain.y = 0;
@@ -58,14 +58,20 @@ class App {
       rain.draw(this.ctx);
     });
     if (this.pressFalg) {
-      for (let index = 0; index < 100; index++) {
+      for (let index = 0; index < RAIN_COUNT; index++) {
         this.rains[index].vy = 0;
       }
     } else {
-      for (let index = 0; index < 100; index++) {
+      for (let index = 0; index < RAIN_COUNT; index++) {
         this.rains[index].vy = this.speeds[index];
       }
     }
+  }
+
+  animate() {
+    window.requestAnimationFrame(this.animate.bind(this));
+    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+    this.infiniteDrop();
   }
 }
 

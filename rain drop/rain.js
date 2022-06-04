@@ -1,3 +1,5 @@
+import { Particle } from "./particle.js";
+
 export class Rain {
   constructor(canvasWidth, radius, vy) {
     this.radius = radius;
@@ -10,7 +12,7 @@ export class Rain {
 
   draw(ctx) {
     this.y += this.vy;
-    ctx.fillStyle = "#C6DCE4";
+    ctx.fillStyle = "#243A73";
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
     ctx.fill();
