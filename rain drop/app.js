@@ -12,6 +12,17 @@ class App {
 
     window.requestAnimationFrame(this.animate.bind(this));
 
+    this.pressFalg = false;
+    window.addEventListener("mousedown", () => {
+      this.pressFalg = true;
+    });
+    window.addEventListener("mouseup", () => {
+      this.pressFalg = false;
+    });
+
+    this.speeds = [];
+    this.randomSpeedCreater();
+
     this.rains = [];
     this.spawnRain();
   }
@@ -25,18 +36,36 @@ class App {
   }
 
   spawnRain() {
-    setInterval(() => {
-      this.rains.push(new Rain(this.canvasWidth, 5));
-      console.log(this.rains);
-    }, 2000);
+    for (let index = 0; index < 100; index++) {
+      this.rains.push(new Rain(this.canvasWidth, 5, this.speeds[index]));
+    }
+  }
+
+  randomSpeedCreater() {
+    for (let index = 0; index < 100; index++) {
+      this.speeds.push(Math.random() * 10 + 1);
+    }
   }
 
   animate(t) {
     window.requestAnimationFrame(this.animate.bind(this));
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     this.rains.forEach((rain) => {
+      if (rain.y > this.canvasHeight) {
+        rain.y = 0;
+        rain.vy = this.speeds[this.rains.indexOf(rain)];
+      }
       rain.draw(this.ctx);
     });
+    if (this.pressFalg) {
+      for (let index = 0; index < 100; index++) {
+        this.rains[index].vy = 0;
+      }
+    } else {
+      for (let index = 0; index < 100; index++) {
+        this.rains[index].vy = this.speeds[index];
+      }
+    }
   }
 }
 

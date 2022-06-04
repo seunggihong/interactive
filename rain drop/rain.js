@@ -1,7 +1,7 @@
 export class Rain {
-  constructor(canvasWidth, radius) {
+  constructor(canvasWidth, radius, vy) {
     this.radius = radius;
-    this.vy = Math.random() * 10 + 1;
+    this.vy = vy;
 
     const diameter = this.radius * 2;
     this.x = Math.random() * canvasWidth - diameter;
