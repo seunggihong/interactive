@@ -1,5 +1,3 @@
-import { Particle } from "./particle.js";
-
 export class Rain {
   constructor(canvasWidth, radius, vy) {
     this.radius = radius;
