@@ -14,7 +14,7 @@ class App {
     this.isDown = false;
     this.moveX = 0;
     this.offsetX = 0;
-    document.addEventListener("pointerdown", this.onDown.bind(this), false);
+    document.addEventListener("mousedown", this.onDown.bind(this), false);
     document.addEventListener("pointermove", this.onMove.bind(this), false);
     document.addEventListener("pointerup", this.onUp.bind(this), false);
 
@@ -59,7 +59,9 @@ class App {
     }
   }
 
-  onUp(e) {}
+  onUp(e) {
+    this.isDown = false;
+  }
 }
 
 window.onload = () => {
